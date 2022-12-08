@@ -1,11 +1,22 @@
 <script>
-// import TheWelcome from '../components/TheWelcome.vue'
+import { mapState, mapActions } from 'pinia'
+import { useUserStore } from '../stores/user';
+
 import Berita from '../components/Berita.vue'
 export default {
   name: 'HomeView',
   components: {
     Berita
-  }
+  },
+  computed: {
+    ...mapState(useUserStore, ['berita'])
+  },
+  methods: {
+    ...mapActions(useUserStore, ['fetchBerita'])
+  },
+  created() {
+    this.fetchBerita()
+  },
 }
 </script>
 
@@ -27,9 +38,7 @@ export default {
 
     <!-- Berita Page -->
     <div class="box-container">
-      <div v-for="berita in 8">
-        <Berita />
-      </div>
+      <Berita v-for="(item, idx) in berita" :item="item" :key="`berita-${idx}`" />
     </div>
     <!-- End Berita Page-->
 
