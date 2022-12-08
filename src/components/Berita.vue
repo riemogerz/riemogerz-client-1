@@ -1,23 +1,29 @@
 <script>
+import { mapState, mapActions } from 'pinia'
+import { useUserStore } from '../stores/user';
+
 export default {
-	name: 'Berita'
+	name: 'Berita',
+	props: ['item']
 }
 </script>
 
 <template>
-	<div class="box">
-		<div class="image">
-			<h3> <i class="fa-solid fa-calendar"></i> 8 Desember 2022 </h3>
-			<img src="image/blog-1.jpg" alt="">
-		</div>
-		<div class="content">
-			<div class="tags">
-				<a href="#"> <i class="fa-solid fa-tag"></i> Politik </a>
-
+	<div>
+		<div class="box">
+			<div class="image">
+				<h3> <i class="fa-solid fa-calendar"></i> {{ item.pubDate }} </h3>
+				<img :src="item.thumbnail" :alt="item.title">
 			</div>
-			<h3>Judul Berita</h3>
-			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem, earum.</p>
-			<a href="#" class="btn">Baca selanjutnya...</a>
+			<div class="content">
+				<div class="tags">
+					<a href="#"> <i class="fa-solid fa-tag"></i> Politik </a>
+
+				</div>
+				<h3>{{ item.title }}</h3>
+				<p>{{ item.description }}</p>
+				<a :href="item.link" class="btn" terget="_blank">Baca selanjutnya...</a>
+			</div>
 		</div>
 	</div>
 </template>
