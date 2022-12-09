@@ -19,6 +19,8 @@ export const useUserStore = defineStore('user', {
 		dataDapilProvinsi: [],
 		namaProvinsi: 'ACEH',
 		daftarProvinsi: [],
+		inputPolling: '',
+		daftarPolling: []
 
 	}),
 	actions: {
@@ -60,7 +62,7 @@ export const useUserStore = defineStore('user', {
 
 		async forgotPassword() {
 			try {
-				const { data } = await axios
+				// const { data } = await axios
 			} catch (error) {
 				console.log(error);
 			}
@@ -90,6 +92,24 @@ export const useUserStore = defineStore('user', {
 			} catch (error) {
 				this.popUpError(error.response.data.message)
 				// console.log(error);
+			}
+		},
+
+		async polling() {
+			try {
+				const { data } = await axios({
+					url: `${baseUrl}/polling`,
+					method: 'post',
+					data: {
+						name: this.inputPolling
+					}
+				})
+
+				this.popUpSuccess(data.message)
+				console.log(data);
+			} catch (error) {
+				this.popUpError('Anda Gagal Memilih')
+				console.log(error);
 			}
 		},
 
@@ -126,8 +146,6 @@ export const useUserStore = defineStore('user', {
 				})
 
 				this.berita = data.posts
-
-				console.log(data.posts, '---');
 			} catch (error) {
 				console.log(error);
 			}
@@ -164,7 +182,6 @@ export const useUserStore = defineStore('user', {
 		},
 
 		async fetchDapilDprRiPerProvinsi() {
-			console.log(this.namaProvinsi);
 			try {
 				const { data } = await axios({
 					url: `${baseUrl}/pemilu/dapil/dprri/${this.namaProvinsi}`,
@@ -207,5 +224,20 @@ export const useUserStore = defineStore('user', {
 				console.log(error);
 			}
 		},
+
+		async fetchDataPolling() {
+			try {
+				const { data } = await axios({
+					url: `${baseUrl}/data`,
+					method: 'get'
+				})
+
+				// console.log(data, '------------');
+				this.daftarPolling = data
+			} catch (error) {
+				console.log(error);
+			}
+		}
+
 	}
 })

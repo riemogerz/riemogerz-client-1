@@ -265,7 +265,7 @@ section {
   color: #666;
 }
 
-.form-input form .flex input, .form-input form .flex textarea {
+.form-input form .flex input, .form-input form .flex select, .form-input form .flex textarea {
   width: 100%;
   margin-top: .5rem;
   padding: 1rem 1.2rem;

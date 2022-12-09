@@ -10,6 +10,7 @@ import { RouterLink, RouterView } from 'vue-router'
     <nav class="navbar">
       <RouterLink to="/">Beranda</RouterLink>
       <RouterLink to="/dapil">Dapil</RouterLink>
+      <RouterLink to="/polling">Polling</RouterLink>
       <RouterLink to="/login">Login</RouterLink>
       <RouterLink to="/register">Register</RouterLink>
     </nav>

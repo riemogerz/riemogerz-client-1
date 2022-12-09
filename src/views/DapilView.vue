@@ -19,10 +19,6 @@ export default {
 	methods: {
 		...mapActions(useUserStore, ['fetchDapilDprRi', 'fetchNamaProvinsi', 'fetchDapilDprRiPerProvinsi']),
 
-		chartAlokasiDapilDprRi() {
-
-			// this.alokasiKursi = 
-		},
 	},
 	async created() {
 		await this.fetchDapilDprRi()

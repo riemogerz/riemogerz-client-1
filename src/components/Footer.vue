@@ -36,9 +36,9 @@ export default {
 				<h3>Tentang Kami</h3>
 				<p>Jl. Tirta Dharma Komp. Bersama, Jalur 1 No. 22B Kec. Banjarmasin Timur, Kota Banjarmasin, Kalimantan Selatan
 				</p>
-				<iframe scrolling="no" marginheight="0" marginwidth="0"
+				<iframe title="Lokasi Perusahaan"
 					src="https://maps.google.com/maps?width=100%25&amp;height=200&amp;hl=en&amp;q=Jalan%20Pramuka%20Banjarmasin+(Amnesia%20News)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-					width="100%" height="200" frameborder="0"></iframe>
+					width="100%" height="200"></iframe>
 			</div>
 		</div>
 
