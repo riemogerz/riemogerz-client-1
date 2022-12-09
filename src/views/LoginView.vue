@@ -32,7 +32,6 @@ export default {
         </div>
       </div>
       <input type="submit" value="Login" class="btn">
-
     </form>
   </section>
 </template>

@@ -1,10 +1,7 @@
 <script>
-import { mapState, mapActions } from 'pinia'
-import { useUserStore } from '../stores/user';
-
 export default {
 	name: 'Berita',
-	props: ['item']
+	props: ['item'],
 }
 </script>
 

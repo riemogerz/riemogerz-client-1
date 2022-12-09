@@ -15,6 +15,10 @@ export const useUserStore = defineStore('user', {
 			photo: ''
 		},
 		berita: [],
+		dataDapilAll: [],
+		dataDapilProvinsi: [],
+		namaProvinsi: 'ACEH',
+		daftarProvinsi: [],
 
 	}),
 	actions: {
@@ -54,6 +58,14 @@ export const useUserStore = defineStore('user', {
 			})
 		},
 
+		async forgotPassword() {
+			try {
+				const { data } = await axios
+			} catch (error) {
+				console.log(error);
+			}
+		},
+
 		// LOGIN
 		async loginApp() {
 			try {
@@ -69,6 +81,7 @@ export const useUserStore = defineStore('user', {
 				localStorage.setItem('access_token', access_token)
 				localStorage.setItem('user_id', user_id)
 				localStorage.setItem('email', email)
+				localStorage.setItem('validateKey', validateKey)
 
 				// router.push('/')
 				console.log(data);
@@ -115,6 +128,81 @@ export const useUserStore = defineStore('user', {
 				this.berita = data.posts
 
 				console.log(data.posts, '---');
+			} catch (error) {
+				console.log(error);
+			}
+		},
+
+		async fetchDapilDprRi() {
+			try {
+				const { data } = await axios({
+					url: `${baseUrl}/pemilu/dapil/dprri`,
+					method: 'get'
+				})
+				let { count, dapil } = data
+				let dataSend = dapil.map(el => {
+					delete el.TingkatDapil
+					delete el.NamaProvinsi
+					delete el.wilayah
+					delete el.JumlahKursi
+					delete el.MinimumKursi
+					delete el.MaksimumKursi
+					delete el.id
+					delete el.jumlahWilayah
+				})
+				let arr = []
+				for (let i = 0; i < dapil.length; i++) {
+					let nama = dapil[i].namaDapil
+					let kursi = dapil[i].AlokasiKursi
+					arr.push([nama, kursi])
+				}
+
+				this.dataDapilAll = arr
+			} catch (error) {
+				console.log(error);
+			}
+		},
+
+		async fetchDapilDprRiPerProvinsi() {
+			console.log(this.namaProvinsi);
+			try {
+				const { data } = await axios({
+					url: `${baseUrl}/pemilu/dapil/dprri/${this.namaProvinsi}`,
+					method: 'get'
+				})
+				let { count, dapil } = data
+				let dataSend = dapil.map(el => {
+					delete el.TingkatDapil
+					delete el.NamaProvinsi
+					delete el.wilayah
+					delete el.JumlahKursi
+					delete el.MinimumKursi
+					delete el.MaksimumKursi
+					delete el.id
+					delete el.jumlahWilayah
+				})
+				let arr = []
+				for (let i = 0; i < dapil.length; i++) {
+					let nama = dapil[i].namaDapil
+					let kursi = dapil[i].AlokasiKursi
+					arr.push([nama, kursi])
+				}
+
+				this.dataDapilProvinsi = arr
+			} catch (error) {
+				console.log(error);
+			}
+		},
+
+		async fetchNamaProvinsi() {
+			try {
+				const { data } = await axios({
+					url: `${baseUrl}/pemilu/dapil/dprri?type=true`,
+					method: 'get'
+				})
+				let { count, provinsi } = data
+				this.daftarProvinsi = provinsi
+
 			} catch (error) {
 				console.log(error);
 			}
